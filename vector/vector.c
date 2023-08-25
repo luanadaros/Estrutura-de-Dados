@@ -18,7 +18,6 @@ void vector_push_back(Vector *v, data_type val){
     if(v->size == v->allocated){
         v->allocated = v->allocated * 2;
         v->data = (data_type *)realloc(v->data, v->allocated * sizeof(data_type));
-        //printf("realloc\n");
     }
 
     v->data[v->size] = val;
@@ -81,3 +80,18 @@ data_type vector_pop_back(Vector *v){
 
     return removed;
 }
+
+void vector_insert(Vector *v, int i, data_type val){
+
+    if(v->size == v->allocated){
+        v->allocated = v->allocated * 2;
+        v->data = (data_type *)realloc(v->data, v->allocated * sizeof(data_type));
+    }
+    v->size++;
+
+    for(int j = v->size - 1; j > i; j--){
+        v->data[j] = v->data[j-1];
+    }
+
+    v->data[i] = val;
+} 
