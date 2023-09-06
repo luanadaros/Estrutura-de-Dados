@@ -1,13 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "vector.h"
-#define VECTOR_INIT_SIZE 10
+//#define VECTOR_INIT_SIZE 10
 
-Vector *vector_construct(){
+Vector *vector_construct(int tam){
     Vector * v = (Vector *)calloc(1, sizeof(Vector));
 
-    v->data = (data_type *)calloc(VECTOR_INIT_SIZE, sizeof(data_type));
-    v->allocated = VECTOR_INIT_SIZE;
+    v->data = (data_type *)calloc(tam, sizeof(data_type));
+    v->allocated = tam;
     v->size = 0;
 
     return v;
