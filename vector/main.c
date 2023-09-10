@@ -6,7 +6,7 @@
 
 int main()
 {
-    int i, m, idx, val;
+    int i, m, val;
 
     Vector *v;
 
@@ -16,9 +16,11 @@ int main()
 
     for (i = 0; i < m; i++)
     {
-        scanf("%d %d", &idx, &val);
-        vector_insert(v, idx, val);
+        scanf("%d", &val);
+        vector_push_back(v, val);
     }
+
+    vector_reverse(v);
 
     for (i = 0; i < vector_size(v); i++)
         printf("%d\n", vector_get(v, i));
