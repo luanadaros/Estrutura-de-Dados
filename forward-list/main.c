@@ -1,22 +1,41 @@
-#include <stdlib.h>
+
 #include <stdio.h>
-#include "flist.h"
 
-int main (){
-    Flist *flist = flist_construct();
+#include "forward_list.h"
 
-    for(int i = 10; i >= 1; i--){
-        flist_push_front(flist, i);
+void print_int(data_type data)
+{
+    printf("%d", data);
+}
+
+int main()
+{
+    int n, val;
+
+    ForwardList *l = forward_list_construct();
+
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &val);
+        forward_list_push_front(l, val);
     }
 
-    Node * node_it = flist->head;
+    ForwardList *l2 = forward_list_construct();
 
-    while(node_it != NULL){
-        printf("%d\n", node_it->value);
-        node_it = node_it->next;
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &val);
+        forward_list_push_front(l2, val);
     }
 
-    flist_destroy(flist);
+    forward_list_cat(l, l2);
+
+    forward_list_print(l, print_int);
+
+    forward_list_destroy(l);
+    forward_list_destroy(l2);
 
     return 0;
 }
