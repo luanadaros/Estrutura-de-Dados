@@ -11,18 +11,16 @@ double get_timestamp()
 }
 
 int main (){
-    int n;
+    int n = 1000;
     int m;
     int valor;
     double inicio, fim, duracao;
     double maior = -1000000, menor = 1000000, medio = 0;
-    double tempo_primeiro, tempo_ultimo;
 
     srand(time(NULL));
 
-    printf("N menor maior medio primeiroElement ultimoElement\n");
+    printf("N menor maior medio\n");
 
-    for(n = 200; n < 200001; n += 20000){
         Vector * v = vector_construct(n);
 
         //preenche vetor com n valores aleatorios
@@ -31,14 +29,15 @@ int main (){
         }
 
 
-        for(m = 0; m < 7000; m++){
+        for(m = 0; m < 5000; m++){
 
             //busca valor aleatorio no vetor
             valor = vector_get(v, rand() % n);
+            vector_sort(v);
 
             //mede tempo para encontrar o valor
             inicio = get_timestamp();
-            vector_find(v, valor);
+            vector_binary_search(v, valor);
             fim = get_timestamp();
             duracao = fim - inicio; 
 
@@ -51,31 +50,11 @@ int main (){
             }
 
             medio += duracao;
-
-            inicio = get_timestamp();
-            vector_find(v, v->data[0]);
-            fim = get_timestamp();
-            tempo_primeiro = fim - inicio;
-
-            inicio = get_timestamp();
-            vector_find(v, v->data[v->size-1]);
-            fim = get_timestamp();
-            tempo_ultimo = fim - inicio;
     }   
 
-    medio = medio/7000;
+    medio = medio/5000;
 
-    printf("%d %.7lf %.7lf %.7lf %.7lf %.7lf\n", n, menor, maior, medio, tempo_primeiro, tempo_ultimo);
-
-    //volta pros valores iniciais
-    maior = -1000000;
-    menor = 1000000;
-    medio = 0;
-    tempo_primeiro = 0;
-    tempo_ultimo = 0;
+    printf("%d %.7lf %.7lf %.7lf\n", n, menor, maior, medio);
 
     vector_destroy(v);
-    }
 }
-
-

@@ -26,7 +26,7 @@ int main (){
 
         //preenche vetor com n valores aleatorios
         for(int i = 0; i < n; i++) {
-            vector_push_back(v, rand()); 
+            vector_push_back(v, rand() % n); 
         }
 
 
@@ -34,6 +34,7 @@ int main (){
 
             //busca valor aleatorio no vetor
             valor = vector_get(v, rand() % n);
+            vector_sort(v);
 
             //mede tempo para encontrar o valor
             inicio = get_timestamp();

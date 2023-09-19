@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "vector.h"
-#define VECTOR_INIT_SIZE 10
+//#define VECTOR_INIT_SIZE 10
 
 Vector *vector_construct(int tam){
     Vector * v = (Vector *)calloc(1, sizeof(Vector));
@@ -12,6 +12,7 @@ Vector *vector_construct(int tam){
 
     return v;
 }
+
 void vector_push_back(Vector *v, data_type val){
 
     if(v->size == v->allocated){
@@ -138,7 +139,7 @@ int vector_binary_search(Vector *v, data_type val){
         else if(v->data[central] < val){
             min = central + 1;
         }
-        else{
+        else {
             return central;
         }
     }
