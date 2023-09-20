@@ -31,14 +31,7 @@ data_type forward_list_pop_front(ForwardList *l);
 //retorna lista invertida
 ForwardList *forward_list_reverse(ForwardList *l);
 
-/**
- * @brief Removes all nodes from the linked list.
- * Removes all nodes from the linked list and frees the memory allocated for them.
- * @param l
- * Pointer to the linked list.
- * @note
- * The caller is responsible for freeing the memory allocated for the data stored in the nodes.
- */
+//remove todos os nós da lista
 void forward_list_clear(ForwardList *l);
 
 //remove da listas os nós que tem o valor indicado 
@@ -54,21 +47,10 @@ void forward_list_remove(ForwardList *l, data_type val);
  */
 void forward_list_unique(ForwardList *l);
 
-/**
- * @brief Adds all nodes from the given list to the end of the linked list.
- * @param l
- * Pointer to the linked list.
- * @param m
- * Pointer to the linked list to be added to the end of the linked list.
- */
+//concatena a lista m ao final da lista l
 void forward_list_cat(ForwardList *l, ForwardList *m);
 
-/**
- * @brief Sorts the linked list.
- * Sorts the linked list.
- * @param l
- * Pointer to the linked list.
- */
+//ordena lista
 void forward_list_sort(ForwardList *l);
 
 //free na lista e em todos os seus nós
