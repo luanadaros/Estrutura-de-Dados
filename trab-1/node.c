@@ -10,7 +10,7 @@ Node *node_construct(data_type value, Node *next){
     return n;
 }
 
-data_type * node_value(Node *n){
+data_type node_value(Node *n){
     return n->value;
 }
 

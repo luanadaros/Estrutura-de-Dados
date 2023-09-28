@@ -12,6 +12,9 @@ ForwardList *forward_list_construct();
 int forward_list_size(ForwardList *l);
 void forward_list_push_front(ForwardList *l, data_type data);
 void forward_list_print(ForwardList *l, void (*print_fn)(data_type));
+data_type forward_list_get(ForwardList *l, int i);
+data_type forward_list_pop_front(ForwardList *l);
+int forward_list_find(ForwardList *l, void *, int(*eq)(void *, data_type));
 
 void forward_list_destroy(ForwardList *l);
 

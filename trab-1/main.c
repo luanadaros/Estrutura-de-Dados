@@ -12,7 +12,7 @@ void print_int(data_type data)
 
 int main()
 {
-    int n, val;
+    int n;
 
     ForwardList *l = forward_list_construct();
 
@@ -20,6 +20,7 @@ int main()
 
     for (int i = 0; i < n; i++)
     {
+        int val;
         scanf("%d", &val);
         forward_list_push_front(l, &val);
     }
