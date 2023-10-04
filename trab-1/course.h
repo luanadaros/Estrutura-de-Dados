@@ -12,6 +12,9 @@ typedef struct{
 } Course;
 
 Course * course_construct(char *name, char *id, char* professor);
-void course_destroy(Course *c);
+Course * course_read();
+int course_eq_id(void *id, data_type course);
+void course_read_and_add_requisite(ForwardList *courses);
+void course_destroy(void *course);
 
 #endif

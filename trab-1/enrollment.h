@@ -5,13 +5,15 @@
 #include "student.h"
 
 typedef struct {
-    Student * student;
+    char student_id[10];
+    char course_id[10];
     float score;
     float attendance_percent;
     int approved;
 } Enrollment;
 
-Enrollment * enrollment_construct(Student * s, float score, float percent, float approved);
-void enrollment_destroy(Enrollment *e);
+Enrollment * enrollment_construct(char* course_id, char* student_id, float score, float percent, float approved);
+Enrollment * enrollment_read();
+void enrollment_destroy(void *enrollment);
 
 #endif

@@ -36,12 +36,15 @@ void forward_list_print(ForwardList *l, void (*print_fn)(data_type)){
     printf("]\n");
 }
 
-void forward_list_destroy(ForwardList *l){
+void forward_list_destroy(ForwardList *l, void(*data_destroy)(data_type)){
     Node * node_it= l->head;
     Node * next;
+    data_type aux;
 
     while(node_it != NULL){
         next = node_next(node_it);
+        aux = node_it->value;
+        data_destroy(aux);
         node_destroy(node_it);
         node_it = next;
     }

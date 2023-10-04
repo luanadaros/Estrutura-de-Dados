@@ -10,6 +10,8 @@ typedef struct {
 } Student;
 
 Student * student_construct(char* name, char* id, char* email);
-void student_destroy(Student * s);
+Student * student_read();
+int student_eq_id(void *id, data_type student);
+void student_destroy(void * student);
 
 #endif
