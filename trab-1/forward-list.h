@@ -18,5 +18,6 @@ int forward_list_find(ForwardList *l, void *, int(*eq)(void *, data_type));
 
 void forward_list_destroy(ForwardList *l, void(*data_destroy)(data_type));
 void forward_list_clear(ForwardList *l);
+void forward_list_sort(ForwardList *l, int(*cmp)(data_type, data_type));
 
 #endif

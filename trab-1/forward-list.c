@@ -108,3 +108,28 @@ void forward_list_clear(ForwardList *l){
     l->size = 0;
     l->head = NULL;
 }
+
+void forward_list_sort(ForwardList *l, int(*cmp)(void *, data_type)){
+    Node * node_it = l->head;
+    Node * next;
+    int size_aux1 = l->size, size_aux2 = 1;
+    data_type value_aux;
+    
+    while(size_aux1 > 1){
+        while(size_aux2 < size_aux1 ){
+            next = node_next(node_it);
+
+            if(cmp(node_value(node_it), node_value(next) > 0)){
+                value_aux = node_value(node_it);
+                node_new_value(node_it, node_value(next));
+                node_new_value(next, value_aux);
+            }
+            node_it = next;
+            size_aux2++;
+        }
+
+        node_it = l->head;
+        size_aux2 = 0;
+        size_aux1--;
+    }
+}

@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdio.h>
+#include <string.h>
 
 //alunos matriculados na disciplina
 void enrolled_students(ForwardList * courses){
@@ -70,18 +70,102 @@ void direct_requirements(ForwardList * courses){
 }
 
 //pre requisitos indiretos
-void full_requirements(ForwardList * courses);
+void full_requirements(ForwardList * courses){
+    Course * course;
+    int course_idx;
+    char id[10];
+
+    scanf("%*c");
+    scanf("%[^\n]", id);
+
+    course_idx = forward_list_find(courses, id, course_eq_id);
+    course = forward_list_get(courses, course_idx);
+
+    Node * node_it, * next;
+    Course * aux;
+
+    node_it = course->requisites->head;
+
+    while(node_it != NULL){
+        next = node_it->next;
+        aux = node_it->value;
+
+        course_print_name(node_it->value);
+
+        if(aux->requisites->size > 0){
+            forward_list_print(aux->requisites, course_print_name);
+        }
+        node_it = next;
+    }
+}
 
 //disciplinas matriculadas pelo aluno
-void enrolled_courses(ForwardList * enrollments){
+void enrolled_courses(ForwardList * courses){
     char student_id[10];
 
     scanf("%*c");
     scanf("%[^\n]", student_id);
 
-    ForwardList * unique = forward_list_construct();
+    Node * node_it_c, * node_it_e, * next_c, *next_e;
+    Course * aux_c;
+    Enrollment * aux_e;
 
+    node_it_c = courses->head;
+    
+    while(node_it_c != NULL){
+        next_c = node_it_c->next;
+        aux_c = node_it_c->value;
+        node_it_e = aux_c->enrollments->head;
 
-    forward_list_clear(unique);
-    free(unique);
+        while(node_it_e != NULL){
+            next_e = node_it_e->next;
+            aux_e = node_it_e->value;
+            if(!strcmp(aux_e->student->id, student_id)){
+                course_print_name(aux_c);
+                break;
+            }
+            node_it_e = next_e;
+        }
+
+        node_it_c = next_c;
+    }
+}
+
+//aprovações por aluno
+void approvals_per_student(ForwardList * courses){
+    char student_id[10];
+
+    scanf("%*c");
+    scanf("%[^\n]", student_id);
+
+    ForwardList * auxiliar = forward_list_construct();
+
+    Node * node_it_c, * node_it_e, * next_c, *next_e;
+    Course * aux_c;
+    Enrollment * aux_e;
+
+    node_it_c = courses->head;
+    
+    while(node_it_c != NULL){
+        next_c = node_it_c->next;
+        aux_c = node_it_c->value;
+        node_it_e = aux_c->enrollments->head;
+
+        while(node_it_e != NULL){
+            next_e = node_it_e->next;
+            aux_e = node_it_e->value;
+            if(!strcmp(aux_e->student->id, student_id) && (aux_e->approved == 1 || (aux_e->score >= 5 && aux_e->attendance_percent >= 0.75))){
+                forward_list_push_front(auxiliar, aux_c);
+                break;
+            }
+            node_it_e = next_e;
+        }
+
+        node_it_c = next_c;
+    }
+
+    forward_list_sort(auxiliar, course_cmp_name);
+    forward_list_print(auxiliar, course_print_name);
+    forward_list_clear(auxiliar);
+    free(auxiliar);
 }

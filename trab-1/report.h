@@ -9,7 +9,8 @@
 void enrolled_students(ForwardList * courses);
 void direct_requirements(ForwardList * courses);
 void full_requirements(ForwardList * courses);
-void enrolled_courses(ForwardList * enrollments);
+void enrolled_courses(ForwardList * courses);
+void approvals_per_student(ForwardList * courses);
 
 void students_overview(ForwardList * students, ForwardList * enrollments);
 void courses_overview(ForwardList * courses);

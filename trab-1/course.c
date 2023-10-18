@@ -91,3 +91,10 @@ void course_print_name(data_type course){
 
     printf("%s\n", c->name);
 }
+
+int course_cmp_name(data_type course1, data_type course2){
+    Course * c1 = course1;
+    Course * c2 = course2;
+
+    return strcmp(c1->name, c2->name);
+}

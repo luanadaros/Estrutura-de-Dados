@@ -16,4 +16,5 @@ Enrollment * enrollment_construct(char* course_id, Student * student, float scor
 Enrollment * enrollment_read(ForwardList * students);
 void enrollment_destroy(void *enrollment);
 
+
 #endif

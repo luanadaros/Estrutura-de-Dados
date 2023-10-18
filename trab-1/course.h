@@ -20,5 +20,6 @@ void course_read_and_add_requisite(ForwardList *courses);
 void course_destroy(void *course);
 void course_add_enrollments(ForwardList * courses, ForwardList * enrollments);
 void course_print_name(data_type course);
+int course_cmp_name(data_type course1, data_type course2);
 
 #endif

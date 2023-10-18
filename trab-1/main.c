@@ -59,6 +59,12 @@ int main(){
     else if(option == 2){
         direct_requirements(courses);
     }
+    else if(option == 3){
+        full_requirements(courses);
+    }
+    else if(option == 4){
+        enrolled_courses(courses);
+    }
 
     forward_list_destroy(students, student_destroy);
     forward_list_destroy(courses, course_destroy);
