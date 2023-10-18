@@ -5,6 +5,7 @@
 #include "student.h"
 #include "course.h"
 #include "enrollment.h"
+#include "report.h"
 
 int main(){
     int n, i;
@@ -22,6 +23,41 @@ int main(){
     for(i = 0; i < n; i++){
         aux_s = student_read();
         forward_list_push_front(students, aux_s);
+    }
+
+    scanf("%d", &n); //numero de disciplinas
+
+    for(i = 0; i < n; i++){
+        aux_c = course_read();
+        forward_list_push_front(courses, aux_c);
+    }
+
+    scanf("%d", &n); //numero de pre-requisitos
+
+    for(i = 0; i < n; i++){
+        course_read_and_add_requisite(courses);
+    }
+
+    scanf("%d", &n); //numero de matriculas
+
+    for(i = 0; i < n; i++){
+        aux_e = enrollment_read(students);
+        forward_list_push_front(enrollments, aux_e);
+    }
+
+    //adiciona as matriculas em seus determinados cursos
+    course_add_enrollments(courses, enrollments);
+
+    int option;
+
+
+    scanf("%d", &option);
+
+    if(option == 1){
+        enrolled_students(courses);
+    }
+    else if(option == 2){
+        direct_requirements(courses);
     }
 
     forward_list_destroy(students, student_destroy);

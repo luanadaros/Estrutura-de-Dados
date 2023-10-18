@@ -2,6 +2,8 @@
 #define COURSE_H
 
 #include "forward-list.h"
+#include "student.h"
+#include "enrollment.h"
 
 typedef struct{
     char name[50];
@@ -16,5 +18,7 @@ Course * course_read();
 int course_eq_id(void *id, data_type course);
 void course_read_and_add_requisite(ForwardList *courses);
 void course_destroy(void *course);
+void course_add_enrollments(ForwardList * courses, ForwardList * enrollments);
+void course_print_name(data_type course);
 
 #endif

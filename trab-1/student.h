@@ -13,5 +13,6 @@ Student * student_construct(char* name, char* id, char* email);
 Student * student_read();
 int student_eq_id(void *id, data_type student);
 void student_destroy(void * student);
+void student_print_name(data_type student);
 
 #endif

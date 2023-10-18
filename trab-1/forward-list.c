@@ -22,18 +22,15 @@ void forward_list_print(ForwardList *l, void (*print_fn)(data_type)){
     Node * node_it = l->head;
     Node * next;
 
-    printf("[");
+    //printf("[");
 
     while(node_it != NULL){
         next = node_next(node_it);
         print_fn(node_it->value);
         node_it = next;
-        if(next != NULL){
-            printf(", ");
-        }
     }
 
-    printf("]\n");
+    //printf("]\n");
 }
 
 void forward_list_destroy(ForwardList *l, void(*data_destroy)(data_type)){
@@ -82,7 +79,8 @@ data_type forward_list_pop_front(ForwardList *l){
 }
 
 int forward_list_find(ForwardList *l, void * val, int(*eq)(void *, data_type)){
-    Node * node_it = l->head, * next;
+    Node * node_it = l->head;
+    Node * next;
     int i = 0;
 
     while(node_it != NULL){
@@ -91,7 +89,22 @@ int forward_list_find(ForwardList *l, void * val, int(*eq)(void *, data_type)){
             return i;
         }
         i++;
+        node_it = next;
     }
 
     return -1;
+}
+
+void forward_list_clear(ForwardList *l){
+    Node * node_it= l->head;
+    Node * next;
+
+    while(node_it != NULL){
+        next = node_next(node_it);
+        node_destroy(node_it);
+        node_it = next;
+    }
+
+    l->size = 0;
+    l->head = NULL;
 }

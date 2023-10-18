@@ -19,7 +19,6 @@ Course * course_read(){
     char name[50], id[10], professor[50];
 
     scanf("%*c");
-    scanf("%*c");
     scanf("%[^;];", name);
     scanf("%[^;];", id);
     scanf("%[^\n]", professor);
@@ -56,5 +55,39 @@ void course_read_and_add_requisite(ForwardList *courses){
 
 void course_destroy(void * course){
     Course * c = course;
+    forward_list_clear(c->requisites);
+    free(c->requisites);
+    forward_list_clear(c->enrollments);
+    free(c->enrollments);
     free(c);
+}
+
+void course_add_enrollments(ForwardList * courses, ForwardList * enrollments){
+    Course * course;
+    Node * node_it_e = enrollments->head, * node_it_c = courses->head;
+    Node * next_e, * next_c;
+    Enrollment * aux;
+
+    while(node_it_c != NULL){
+        next_c = node_it_c->next;
+        course = node_it_c->value;
+        node_it_e = enrollments->head;
+
+        while(node_it_e != NULL){
+            next_e = node_it_e->next;
+            aux = node_it_e->value;
+            if(course_eq_id(aux->course_id, course)){
+                forward_list_push_front(course->enrollments, aux);
+            }
+
+            node_it_e = next_e;
+        }
+        node_it_c = next_c;
+    }
+}
+
+void course_print_name(data_type course){
+    Course * c = course;
+
+    printf("%s\n", c->name);
 }

@@ -17,5 +17,6 @@ data_type forward_list_pop_front(ForwardList *l);
 int forward_list_find(ForwardList *l, void *, int(*eq)(void *, data_type));
 
 void forward_list_destroy(ForwardList *l, void(*data_destroy)(data_type));
+void forward_list_clear(ForwardList *l);
 
 #endif

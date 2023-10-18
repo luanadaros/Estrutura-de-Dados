@@ -37,3 +37,9 @@ void student_destroy(void * student){
     Student * s = student;
     free(s);
 }
+
+void student_print_name(data_type student){
+    Student * s = student;
+
+    printf("%s\n", s->name);
+}
