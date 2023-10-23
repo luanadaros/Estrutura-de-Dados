@@ -15,6 +15,7 @@ typedef struct {
 Enrollment * enrollment_construct(char* course_id, Student * student, float score, float percent, float approved);
 Enrollment * enrollment_read(ForwardList * students);
 void enrollment_destroy(void *enrollment);
+void enrollment_print(data_type enrollment);
 
 
 #endif

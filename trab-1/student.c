@@ -43,3 +43,10 @@ void student_print_name(data_type student){
 
     printf("%s\n", s->name);
 }
+
+int student_cmp_name(data_type student1, data_type student2){
+    Student * s1 = student1;
+    Student * s2 = student2;
+
+    return strcmp(s1->name, s2->name);
+}

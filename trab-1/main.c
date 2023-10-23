@@ -65,6 +65,12 @@ int main(){
     else if(option == 4){
         enrolled_courses(courses);
     }
+    else if(option == 6){
+        approvals_per_student(courses);
+    }
+    else if(option == 7){
+        inconsistent_enrollment(enrollments);
+    }
 
     forward_list_destroy(students, student_destroy);
     forward_list_destroy(courses, course_destroy);

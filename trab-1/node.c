@@ -1,12 +1,13 @@
-#include "node.h"
 
 #include <stdlib.h>
+#include "node.h"
 
-Node *node_construct(data_type value, Node *next){
+
+Node *node_construct(data_type value, Node *next)
+{
     Node *n = (Node *)malloc(sizeof(Node));
-    n->next = next;
     n->value = value;
-
+    n->next = next;
     return n;
 }
 
@@ -18,6 +19,15 @@ Node *node_next(Node *n){
     return n->next;
 }
 
-void node_destroy(Node *n){
+void node_new_next(Node *old, Node *new){
+    old->next = new->next;
+};
+
+void node_new_value(Node *n, data_type new_value){
+    n->value = new_value;
+}
+
+void node_destroy(Node *n)
+{
     free(n);
 }

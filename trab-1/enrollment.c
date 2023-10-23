@@ -47,3 +47,13 @@ void enrollment_destroy(void * enrollment){
     Enrollment * e = enrollment;
     free(e);
 }
+
+void enrollment_print(data_type enrollment){
+    Enrollment * e = enrollment;
+
+    printf("%s;", e->course_id);
+    printf("%s;", e->student->id);
+    printf("%.2f;", e->score);
+    printf("%.2f;", e->attendance_percent);
+    printf("%d\n", e->approved);
+}

@@ -14,5 +14,6 @@ Student * student_read();
 int student_eq_id(void *id, data_type student);
 void student_destroy(void * student);
 void student_print_name(data_type student);
+int student_cmp_name(data_type student1, data_type student2);
 
 #endif

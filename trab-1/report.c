@@ -169,3 +169,22 @@ void approvals_per_student(ForwardList * courses){
     forward_list_clear(auxiliar);
     free(auxiliar);
 }
+
+//status inconsistente 
+void inconsistent_enrollment(ForwardList * enrollments){
+    Node * node_it, * next;
+    Enrollment * aux_e;
+
+    node_it = enrollments->head;
+
+    while(node_it != NULL){
+        next = node_it->next;
+        aux_e = node_it->value;
+
+        if(aux_e->approved == 0 && (aux_e->score >= 5 && aux_e->attendance_percent >= 0.75)){
+            enrollment_print(aux_e);
+        }
+
+        node_it = next;
+    }
+}

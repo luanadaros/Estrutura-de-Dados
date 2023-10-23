@@ -119,7 +119,7 @@ void forward_list_sort(ForwardList *l, int(*cmp)(void *, data_type)){
         while(size_aux2 < size_aux1 ){
             next = node_next(node_it);
 
-            if(cmp(node_value(node_it), node_value(next) > 0)){
+            if(cmp(node_value(node_it), node_value(next)) > 0){
                 value_aux = node_value(node_it);
                 node_new_value(node_it, node_value(next));
                 node_new_value(next, value_aux);
