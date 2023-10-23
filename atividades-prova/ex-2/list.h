@@ -91,6 +91,6 @@ data_type list_pop_back(List *l);
  * Pointer to the double linked list.
  *
  */
-void list_destroy(List *l);
+void list_destroy(List *l, void(*data_destroy)(data_type));
 
 #endif

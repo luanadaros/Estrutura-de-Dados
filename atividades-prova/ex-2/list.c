@@ -112,3 +112,20 @@ data_type list_pop_back(List * l){
 
     return data;
 }
+
+void list_destroy(List *l, void(*data_destroy)(data_type)){
+    Node * node_it, * next;
+    data_type data;
+
+    node_it = l->head;
+
+    while(node_it != NULL){
+        next = node_it->next;
+        data = node_it->value;
+        data_destroy(data);
+        node_destroy(node_it);
+        node_it = next;
+    }
+
+    free(l);
+}

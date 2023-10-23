@@ -1,0 +1,6 @@
+Para as pilhas, é possível utilizar uma estrutura de vetor e uma lista encadeada com ponteiro para o final,
+visando ter complexidade constante. No vetor é possível acessar a última posição apenas usando seu índice, já
+na lista utilizamos o ponteiro para o final.
+
+Para as filas somente é possível usar uma lista duplamente encadeada pois ela é a única que permite retirar um 
+termo do final da lista (que seria o começo da fila) com complexidade O(1). 

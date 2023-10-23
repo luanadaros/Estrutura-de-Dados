@@ -1,6 +1,7 @@
 {
     "C_Cpp.default.compilerPath": "/home/luanadralmeida/Estrutura-de-Dados/vector/vector.c",
     "files.associations": {
-        "forward_list.h": "c"
+        "forward_list.h": "c",
+        "queue.h": "c"
     }
 }
