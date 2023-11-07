@@ -14,5 +14,8 @@ void stack_destroy(Stack *s){
     free(s);
 }
 
-void stack_push_front(Stack *, data_type);
+void stack_push_front(Stack *s, data_type data){
+    
+}
+
 data_type stack_pop_front(Stack *);
