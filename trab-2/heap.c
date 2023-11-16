@@ -32,7 +32,7 @@ Heap * heap_construct()
 }
 
 
-void * heap_destroy(Heap * heap){
+void heap_destroy(Heap * heap){
     free(heap); 
 }
 
@@ -104,21 +104,6 @@ void * heap_pop(Heap *heap){
     return data;
 } 
 
-
-void heap_sort(void *array, int array_size, int item_size, double (*key_fn)(void *)){
-    Heap * heap = heap_construct();
-
-    for(int i = 0; i < array_size; i++){
-        heap_push(heap, array + (i * item_size), key_fn(array + i * item_size));
-    }
-
-    for(int i = 0; i < array_size; i++){
-        //array[i] = heap_pop(heap);
-    }
-
-    heap_destroy(heap);
-
-}
 
 int heap_empty(Heap *heap){
     if(heap->size == 0){

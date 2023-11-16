@@ -3,14 +3,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void paths_print(Path *path, int size)
-{
-    int next_predecessor, sucessor, cost_sum = 0;
+Path * paths_construct(int size){
+    Path * path = (Path *)calloc(size, sizeof(Path));
 
-    for(int i = 0; i < size; i++)
-    {
-        while(next_predecessor != 0){
+    return path;
+}
 
-        }
-    }
+void paths_print(Path *path, int size){
+    
+}
+
+void paths_destroy(Path *path, int size){
+    free(path);
 }

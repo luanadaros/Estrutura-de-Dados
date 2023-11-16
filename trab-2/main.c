@@ -1,5 +1,7 @@
 #include "heap.h"
+#include "graph.h"
 #include "path.h"
+//#include "djikstra.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -10,14 +12,14 @@ int main() {
     scanf("%d", &n);
     scanf("%*c");
 
-    int * visited = calloc(n, sizeof(int));
-    Heap * not_visited = heap_construct();
-    Path * path = calloc(n, sizeof(Path));
+    Path * paths = path_construct(n);
+    Graph * graph = graph_construct(n);
 
+    graph_read(graph);
+    paths = djikstra_solve(graph);
+    ////paths_print(path, n);
 
-    heap_destroy(not_visited);
-    free(visited);
-    free(path);
-
+    graph_destroy(graph);
+    path_destroy(paths);
     return 0;
 }

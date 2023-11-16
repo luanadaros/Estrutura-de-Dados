@@ -3,8 +3,9 @@
 
 #include "heap.h"
 #include "path.h"
+#include "graph.h"
 
 
-Path * djikstra_solve(Heap * heap); 
+Path * djikstra_solve(Graph * graph); 
 
 #endif
