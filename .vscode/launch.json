@@ -5,7 +5,7 @@
             "type": "cppdbg",
             "request": "launch",
             "cwd": ".",
-            "program": "${workspaceRoot}/trab-1/main",
+            "program": "${workspaceRoot}/trab-2/main",
             "args": [],
             "preLaunchTask": "compilacao",
         }
