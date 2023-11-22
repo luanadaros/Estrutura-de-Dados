@@ -33,6 +33,7 @@ Heap * heap_construct()
 
 
 void heap_destroy(Heap * heap){
+    free(heap->nodes);
     free(heap); 
 }
 
@@ -112,6 +113,7 @@ int heap_empty(Heap *heap){
     return 0;
 } 
 
+
 void *heap_min(Heap *heap){
     if(heap->size == 0){
         exit(printf("Heap is empty\n"));
@@ -119,6 +121,7 @@ void *heap_min(Heap *heap){
 
     return heap->nodes[0].data;
 } 
+
 
 double heap_min_priority(Heap *heap){
     if(heap->size == 0){
