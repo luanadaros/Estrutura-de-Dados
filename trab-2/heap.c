@@ -39,10 +39,18 @@ void heap_destroy(Heap * heap){
 
 
 void swap_nodes(HeapNode * h1, HeapNode * h2){
-    HeapNode * temp;
-    temp = h1;
-    h1 = h2;
-    h2 = temp;
+    HeapNode * temp = (HeapNode *)calloc(1, sizeof(HeapNode));
+
+    temp->data = h1->data;
+    temp->priority = h1->priority;
+
+    h1->data = h2->data;
+    h1->priority = h2->priority;
+
+    h2->data = temp->data;
+    h2->priority = temp->priority;
+
+    free(temp);
 }
 
 

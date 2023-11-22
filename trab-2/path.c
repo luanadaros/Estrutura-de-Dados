@@ -30,8 +30,8 @@ PathNodes * pathnode_read(int id, int parent, int cost, int cost_to_origin){
 }
 
 void path_print(Path *path){
-    for(int i = 0; i < path->size; i++){
-        printf("%d: %d %d\n", path->nodes[i]->id, path->nodes[i]->parent, path->nodes[i]->cost_to_origin);
+    for(int i = 0; i < path->size - 1; i++){
+        printf("node %d: antecessor - %d / custo para a origem - %d\n", path->nodes[i]->id, path->nodes[i]->parent, path->nodes[i]->cost_to_origin);
     }
 }
 

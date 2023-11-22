@@ -13,7 +13,7 @@ Path * djikstra_solve(Graph * graph){
     int current_corner = 0, cost = 0;
     int n_corners_visited = 0;
 
-    while(n_corners_visited <= graph->n_corners){
+    while(n_corners_visited < graph->n_corners){
         for(int i = 1; i < graph->n_corners; i++){
             if(graph->graph[current_corner][i] != 0){
 
