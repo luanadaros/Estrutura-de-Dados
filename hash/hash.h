@@ -2,26 +2,13 @@
 #define HASH_H
 
 #include "forward-list.h"
+#include "node.h"
 
 typedef struct HashTable HashTable;
 
-typedef struct
-{
-    void *key;
-    void *val;
-}HashTableItem;
+typedef int (*CmpFunction)(void *k1, void *k2);
+typedef int (*HashFunction)(HashTable *h, void * key);
 
-/**
- * @brief Cria a tabela hash
- * @param table_size
- * Número de buckets na tabela hash
- * @param hash_fn
- * Ponteiro de função que recebe como entrada uma chave do tipo void* e retorna um inteiro. 
- * @param cmp_fn
- * Ponteiro de função que recebe como entrada dois void* representando duas chaves e tem a mesma semântica da função strcmp
- * @return HashTable*
- * Retorna o ponteiro da tabela hash recém alocada.
- */
 HashTable *hash_table_construct(int table_size, HashFunction hash_fn, CmpFunction cmp_fn);
 
 // funcao para insercao/atualizacao de pares chave-valor em O(1). Esta função deve usar hash modular para garantir que o valor da chave será mapeado em um bucket válido da tabela hash.

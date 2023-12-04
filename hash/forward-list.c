@@ -83,14 +83,14 @@ data_type forward_list_pop_front(ForwardList *l){
     return removed;
 }
 
-int forward_list_find(ForwardList *l, void * val, int(*eq)(void *, data_type)){
+int forward_list_find(ForwardList *l, void * val, int(*eq)(void *, data_type, void* dados_extras), void* dados_extras){
     Node * node_it = l->head;
     Node * next;
     int i = 0;
 
     while(node_it != NULL){
         next = node_it->next;
-        if(eq(val, node_it->value)){
+        if(eq(val, node_it->value, dados_extras)){
             return i;
         }
         i++;
@@ -137,4 +137,23 @@ void forward_list_sort(ForwardList *l, int(*cmp)(void *, data_type)){
         size_aux2 = 0;
         size_aux1--;
     }
+}
+
+data_type forward_list_remove(ForwardList * l, int idx){
+    Node * node_it = l->head;
+    Node * previous = NULL;
+    int aux = 0;
+
+    while(node_it != NULL && aux < idx){
+        previous = node_it;
+        node_it = node_next(node_it);
+        aux++;
+    }
+
+    previous->next = node_it->next;
+    data_type data = node_it->value;
+    node_destroy(node_it);
+    l->size--;
+
+    return data;
 }

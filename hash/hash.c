@@ -3,19 +3,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-/* 
-define o tipo HashFunction como um ponteiro de função que recebe como entrada a tabela hash (para que o número de buckets possa ser usado para calcular o hash) e a chave do tipo void* e gera como saída um inteiro.
-*/
-typedef int (*HashFunction)(HashTable *h, void *);
+typedef struct
+{   
+    void *key;
+    void *val;
+} HashTableItem;
 
-/* 
-define o tipo CmpFunction como um ponteiro de função que recebe como entrada dois void* e gera como saída um inteiro com a mesma semântica da strcmp.
-*/
-typedef int (*CmpFunction)(void *k1, void *k2);
-
-/*
-A estrutura da hash terá um vetor de ForwardLists, o tamanho do vetor, e as funções de hash e de comparação de chaves. Por fim, é armazenado o número de elementos atualmente na tabela hash.
-*/
 struct HashTable
 {
     ForwardList **buckets;
@@ -24,6 +17,12 @@ struct HashTable
     int table_size;
     int n_elements;
 };
+
+HashTableItem * hash_table_item_construct(){
+    HashTableItem * h = malloc(sizeof(HashTableItem));
+
+    return h;
+}
 
 HashTable *hash_table_construct(int table_size, HashFunction hash_fn, CmpFunction cmp_fn){
     HashTable * h = (HashTable *)malloc(sizeof(HashTable));
@@ -37,29 +36,94 @@ HashTable *hash_table_construct(int table_size, HashFunction hash_fn, CmpFunctio
     return h;
 }
 
+void cmp_node(void *node_1, void *node_2, void *hash_table)
+{
+    char *i1 = node_1;
+    HashTableItem *i2 = node_2;
+    HashTable *h = hash_table;
+
+    return h->cmp_fn(i1, i2->key);
+}
+
 void hash_table_set(HashTable *h, void *key, void *val){
     int key_val = h->hash_fn(h, key);
     key_val = key_val % h->table_size;
-    HashTableItem * h_item;
-    h_item->key = key;
-    h_item->val = val;
 
+
+    //se a flist correspondente a chave key_val ja existe
     if(h->buckets[key_val]){
-        int idx = forward_list_find(h->buckets[key_val], h_item, h->cmp_fn);
-        HashTableItem * temp = forward_list_get(h->buckets[key_val], idx);
-        temp->key = h_item->key;
-        temp->val = h_item->val;
+        int idx = forward_list_find(h->buckets[key_val], key, cmp_node, h);
+
+        if(idx == -1){
+            HashTableItem * h_item = hash_table_item_construct();
+            h_item->key = key;
+            h_item->val = val;
+            forward_list_push_front(h->buckets[key_val], h_item);
+            h->n_elements++;
+        }
+
+        else {
+            HashTableItem * temp = forward_list_get(h->buckets[key_val], idx);
+            temp->key = key;
+            temp->val = val;
+        }
     }
     else {
         h->buckets[key_val] = forward_list_construct();
+        HashTableItem * h_item = hash_table_item_construct();
+        h_item->key = key;
+        h_item->val = val;
         forward_list_push_front(h->buckets[key_val], h_item);
+        h->n_elements++;
     }
 }
 
-void *hash_table_get(HashTable *h, void *key);
+void *hash_table_get(HashTable *h, void *key){
+    int key_val = h->hash_fn(h, key);
+    key_val = key_val % h->table_size;
 
-void *hash_table_pop(HashTable *h, void *key);
+    if(h->buckets[key_val]){
+        int idx = forward_list_find(h->buckets[key_val], key, cmp_node, h);
+        if(idx != -1){
+            return forward_list_get(h->buckets[key_val], idx);
+        }
+    }   
 
-int hash_table_size(HashTable *h);
+    printf("Essa chave nao existe na HashTable.\n");
+    return NULL;
+}
 
-void hash_table_destroy(HashTable *h);
+void *hash_table_pop(HashTable *h, void *key){
+    int key_val = h->hash_fn(h, key);
+    key_val = key_val % h->table_size;
+
+    if(h->buckets[key_val]){
+        int idx = forward_list_find(h->buckets[key_val], key, cmp_node, h);
+        
+        if(idx != -1){
+            h->n_elements--;
+            return forward_list_remove(h->buckets[key_val], idx);
+        }
+    }   
+
+    printf("Essa chave nao existe na HashTable.\n");
+    return NULL;
+}
+
+int hash_table_size(HashTable *h){
+    return h->table_size;
+}
+
+void hash_table_destroy(HashTable *h)
+{
+    for (int i = 0; i < h->table_size; i++)
+    {
+        if (h->buckets[i] != NULL)
+        {
+            forward_list_destroy(h->buckets[i], free);
+        }
+    }
+
+    free(h->buckets);
+    free(h);
+}
