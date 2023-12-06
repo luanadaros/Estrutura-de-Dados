@@ -42,6 +42,46 @@ Node * node_insert(Node * node, void * val, void * key, int (*cmp)(void *, void 
     return node;
 };
 
+Node * node_remove(Node * node, void * key, int (*cmp)(void *, void *)){
+    if(node == NULL){
+        return NULL;
+    }
+    else if(cmp(key, node->key) < 0){
+        node->left = node_remove(node->left, key, cmp);
+    }
+    else if(cmp(key, node->key > 0)){
+        node->right = node_remove(node->right, key, cmp);
+    }
+    else {
+        if (node->left == NULL && node->right == NULL){
+            free(node);
+            node = NULL;
+        }
+        else if (node->left == NULL){
+            Node * temp = node;
+            node = node->right;
+            free(temp);
+        }
+        else if (node->right == NULL){
+            Node * temp = node;
+            node = node->left;
+            free(temp);
+        }
+        else {
+            Node * f = node->left;
+            while(f->right != NULL){
+                f = f->right;
+            }
+            node->key = f->key;
+            node->val = f->val;
+            f->key = key;
+            node->left = node_remove(node->left, key); 
+        }
+    }
+
+    return node;
+}
+
 void node_destroy(Node * node, void (*destroy)(void *, void *)){
     if(node == NULL){
         return NULL;
@@ -71,7 +111,9 @@ void binary_tree_insert(BinaryTree* tree, void * val, void * key, int (*cmp)(voi
         tree->size++;
 }
 
-void * binary_tree_remove(BinaryTree* tree, void * val, int (*cmp)(void*, void*));
+void * binary_tree_remove(BinaryTree* tree, void * val, int (*cmp)(void*, void*)){
+    
+}
 
 void * binary_tree_search(BinaryTree* tree, void * key, int (*cmp)(void*, void*)){
     Node * node = tree->root;
