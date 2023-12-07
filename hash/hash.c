@@ -36,7 +36,7 @@ HashTable *hash_table_construct(int table_size, HashFunction hash_fn, CmpFunctio
     return h;
 }
 
-void cmp_node(void *node_1, void *node_2, void *hash_table)
+int cmp_node(void *node_1, void *node_2, void *hash_table)
 {
     char *i1 = node_1;
     HashTableItem *i2 = node_2;
